@@ -8,10 +8,12 @@ fn die_from_underpopulation() {
     board.cells.push((1, 1));
     // assert that the cell at 1,1 is alive
     assert_eq!(true, board.is_alive((1,1)));
+    println!("board:\n{}", board);
+
     // call next_state()
     board = board.next_state();
     // assert that the cell at 1,1 is dead
     assert_eq!(false, board.is_alive((1,1)));
 
-    
+    println!("board:\n{}", board);
 }

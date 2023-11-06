@@ -1,11 +1,28 @@
 #![cfg_attr(feature = "strict", deny(warnings))]
 
+use std::fmt;
+
 pub fn next_state() -> bool {
     true
 }
 
 pub struct Board {
     pub cells: Vec<(i32, i32)>,
+}
+
+impl fmt::Display for Board {
+    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+        let height = 5;
+        let width = 10;
+        for y in 0..height {
+            for x in 0..width {
+                let value: &str = if self.is_alive((x, y)) { "*" } else { "." };
+                write!(f, "{}", value)?;
+            }
+            write!(f, "\n")?;
+        }
+        Ok(())
+    }
 }
 
 impl Board {
@@ -36,4 +53,5 @@ impl Board {
         }
         new_board
     }
+
 }
