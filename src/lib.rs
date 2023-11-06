@@ -38,22 +38,33 @@ impl Board {
 
     pub fn next_state(&mut self) -> Board {
         let mut new_board = Board::new();
+        // iterate through all cells that are alive + their neighbors
         for cell in &self.cells {
-            let mut neighbors = 0;
             for x in -1..2 {
                 for y in -1..2 {
-                    if x == 0 && y == 0 {
-                        continue;
-                    }
-                    if self.is_alive((cell.0 + x, cell.1 + y)) {
-                        neighbors += 1;
+                    let current_cell = (cell.0 + x, cell.1 + y);
+                    let neighbors = self.count_neighbors(&current_cell);
+                    if neighbors == 3 || (neighbors == 2 && self.is_alive(current_cell)) {
+                        new_board.cells.push(current_cell);
                     }
                 }
             }
-            if neighbors == 2 || neighbors == 3 {
-                new_board.cells.push(*cell);
-            }
         }
         new_board
+    }
+
+    fn count_neighbors(&self, cell: &(i32, i32)) -> i32 {
+        let mut neighbors = 0;
+        for x in -1..2 {
+            for y in -1..2 {
+                if x == 0 && y == 0 {
+                    continue;
+                }
+                if self.is_alive((cell.0 + x, cell.1 + y)) {
+                    neighbors += 1;
+                }
+            }
+        }
+        neighbors
     }
 }
