@@ -29,8 +29,8 @@ impl Board {
     pub fn new() -> Board {
         Board { cells: Vec::new() }
     }
-    pub fn withAliveCellsAt(aliveCells: Vec<(i32, i32)>) -> Board {
-        Board { cells: aliveCells }
+    pub fn with_alive_cells_at(alive_cells: Vec<(i32, i32)>) -> Board {
+        Board { cells: alive_cells }
     }
     pub fn is_alive(&self, cell: (i32, i32)) -> bool {
         self.cells.contains(&cell)

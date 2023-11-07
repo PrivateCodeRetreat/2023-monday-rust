@@ -56,7 +56,7 @@ fn blinker() {
 }
 
 fn verify_game_of_life(alive_cells: Vec<(i32, i32)>, iterations: i32, mut expected_storyboard: &str) {
-    let mut board = Board::withAliveCellsAt(alive_cells);
+    let mut board = Board::with_alive_cells_at(alive_cells);
     let mut storyboard = board.to_string();
     for _ in 0..iterations {
         board = board.next_state();
