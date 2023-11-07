@@ -40,19 +40,12 @@ impl Board {
         let mut new_board = Board::new();
         // iterate through all cells that are alive + their neighbors
         for cell in &self.cells {
-            let mut neighbors: Vec<(i32, i32)> = Vec::new();
-            for x in -1..2 {
-                for y in -1..2 {
-                    let current_cell = (cell.0 + x, cell.1 + y);
-                    neighbors.push(current_cell);
-
-                }
-            }
-
-            for c in neighbors {
+            for c in Self::get_neighborhood(cell) {
                 let neighbors = self.count_neighbors(&c);
                 if neighbors == 3 || (neighbors == 2 && self.is_alive(c)) {
-                    new_board.cells.push(c);
+                    if !new_board.cells.contains(&c) {
+                        new_board.cells.push(c);
+                    }
                 }
             }
         }
@@ -61,14 +54,8 @@ impl Board {
 
     fn count_neighbors(&self, cell: &(i32, i32)) -> i32 {
         let mut neighbors = 0;
-        let mut neighbors2: Vec<(i32, i32)> = Vec::new();
-        for x in -1..2 {
-            for y in -1..2 {
-                neighbors2.push((cell.0 + x, cell.1 + y));
-            }
-        }
 
-        for c in neighbors2 {
+        for c in Self::get_neighborhood(cell) {
             if c == *cell {
                 continue;
             }
@@ -78,5 +65,15 @@ impl Board {
         }
 
         neighbors
+    }
+
+    fn get_neighborhood(cell: &(i32, i32)) -> Vec<(i32, i32)> {
+        let mut neighbors2: Vec<(i32, i32)> = Vec::new();
+        for x in -1..2 {
+            for y in -1..2 {
+                neighbors2.push((cell.0 + x, cell.1 + y));
+            }
+        }
+        neighbors2
     }
 }
