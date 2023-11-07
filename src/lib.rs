@@ -1,6 +1,6 @@
 #![cfg_attr(feature = "strict", deny(warnings))]
 
-use std::fmt;
+use std::{fmt, vec};
 
 pub fn next_state() -> bool {
     true
@@ -40,6 +40,7 @@ impl Board {
         let mut new_board = Board::new();
         // iterate through all cells that are alive + their neighbors
         for cell in &self.cells {
+            let mut vec: Vec<(i32, i32)> = Vec::new();
             for x in -1..2 {
                 for y in -1..2 {
                     let current_cell = (cell.0 + x, cell.1 + y);
