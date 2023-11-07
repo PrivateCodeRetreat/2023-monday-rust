@@ -11,7 +11,7 @@ pub struct Board {
 }
 
 impl fmt::Display for Board {
-    fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    fn fmt(&self, f: & mut fmt::Formatter) -> fmt::Result {
         let height = 5;
         let width = 10;
         for y in 0..height {

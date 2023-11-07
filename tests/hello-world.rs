@@ -65,7 +65,7 @@ fn verify_game_of_life(alive_cells: Vec<(i32, i32)>, iterations: i32, mut expect
 
     
     expected_storyboard = expected_storyboard.trim_start();
-    if (storyboard != expected_storyboard) {
+    if storyboard != expected_storyboard {
         println!("storyboard:\n{}", storyboard);
     }
     assert_eq!(storyboard, expected_storyboard);
